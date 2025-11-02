@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- NO-CACHE HEADERS: Prevent browser caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Arpan Chatterjee - Software Development Engineer @ Amazon</title>
+    <link rel="stylesheet" href="style.css?v=2.0.0&t=nocache">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Arpan Chatterjee</div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">DARK</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="particles" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-greeting">Hi, I'm <span class="gradient-text">Arpan Chatterjee</span></h1>
+                <h2 class="hero-title">Software Development Engineer II @ Amazon</h2>
+                <p class="hero-tagline">ML Platform, Ad Tech &amp; Prime Video Expertise | $100M+ Revenue Impact | Seattle, WA</p>
+                <div class="hero-cta">
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-profile">
+                <div class="profile-image-container">
+                    <img id="profileImage" class="profile-image" src="./profile.jpg" alt="Arpan Chatterjee - Profile Picture">
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">I'm a Software Development Engineer II at Amazon with deep expertise across ML Platform, Ad Tech, and Prime Video. Based in Seattle, I specialize in building scalable systems that drive revenue and optimize operations. Across my tenure at Amazon, I've worked on diverse initiatives including $100M+ revenue impact through ad server optimization, $15M+ in cost savings, and mission-critical payment systems. My work spans distributed systems, machine learning, and infrastructure optimization.</p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Languages</strong>
+                                <p>English, Hindi, Bengali</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Location</strong>
+                                <p>Seattle, Washington, United States</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Experience</strong>
+                                <p>SDE at Amazon</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary" id="downloadResumeBtn">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">🤖</div>
+                    <div class="timeline-content">
+                        <span class="timeline-badge">Current</span>
+                        <h3>Software Development Engineer II</h3>
+                        <h4>Amazon - Prime Video - ML Engineering Platforms</h4>
+                        <p class="timeline-period"><strong>April 2025 - Present (7 months)</strong> | Seattle, Washington, United States</p>
+                        <p class="timeline-description">Building ML engineering platforms and tools for Scientists to develop, test, evaluate, and deploy machine learning models for Prime Video.</p>
+                        <ul class="achievements">
+                            <li>Built comprehensive Model Performance Evaluation Framework from scratch with complete system architecture</li>
+                            <li>Implemented end-to-end ML model evaluation workflows including data sampling and metrics computation</li>
+                            <li>Developed automated contract parsing system for content provider agreements</li>
+                            <li>Identified Prime Video's rights on titles including localization and distribution capabilities</li>
+                            <li>Enabled automated decision-making for content localization workflows</li>
+                            <li>Pioneered 'Architecture-Diagram Driven Development' methodology using Amazon Kiro and Amazon Q</li>
+                            <li>Significantly accelerated development cycles through innovative development practices</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Model Evaluation</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Contract Parsing</span>
+                            <span class="tech-tag">Amazon Kiro</span>
+                            <span class="tech-tag">Amazon Q</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">💰</div>
+                    <div class="timeline-content">
+                        <h3>Software Development Engineer II</h3>
+                        <h4>Amazon - Advertisement - Publisher Ad Server</h4>
+                        <p class="timeline-period"><strong>March 2023 - April 2025 (2 years 2 months)</strong> | Seattle, Washington, United States</p>
+                        <p class="timeline-description">Optimized Amazon's Publisher Ad Server infrastructure and onboarded major clients across Amazon's ecosystem.</p>
+                        <ul class="achievements">
+                            <li>Designed and implemented functionalities within Amazon's Ad Server for business growth</li>
+                            <li>Optimized infrastructural design to achieve more than $15MM yearly cost savings</li>
+                            <li>Onboarded multiple major clients including Prime Video, FreeVee, Twitch, IMDB, Goodreads, Alexa</li>
+                            <li>Onboarded Live Games including Thursday Night Football with 13MM+ average viewership</li>
+                            <li>Generated $100MM+ in ad revenue for Amazon through platform optimization</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Ad Server Architecture</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Infrastructure Optimization</span>
+                            <span class="tech-tag">Distributed Systems</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">📦</div>
+                    <div class="timeline-content">
+                        <h3>Software Development Engineer II</h3>
+                        <h4>Amazon - Transportation Services - Warehouse Operations</h4>
+                        <p class="timeline-period"><strong>August 2022 - March 2025 (2 years 8 months)</strong> | Seattle, Washington, United States</p>
+                        <p class="timeline-description">Built visibility and tracking tools for Amazon's global warehouse operations and logistics infrastructure.</p>
+                        <ul class="achievements">
+                            <li>Developed visibility tool for global Amazon Facility Managers</li>
+                            <li>Enabled tracking of functional state of any Amazon Warehouse worldwide</li>
+                            <li>Helped managers identify packages at risk and prioritize them</li>
+                            <li>Tracked associate actions and package movements within facilities</li>
+                            <li>Improved warehouse operations efficiency globally</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Distributed Systems</span>
+                            <span class="tech-tag">Real-time Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">💳</div>
+                    <div class="timeline-content">
+                        <h3>Software Development Engineer II</h3>
+                        <h4>Amazon - Prime Video - Payments &amp; Subscriptions (India)</h4>
+                        <p class="timeline-period"><strong>October 2021 - August 2022 (11 months)</strong> | Bengaluru, Karnataka, India</p>
+                        <p class="timeline-description">Developed payment systems and subscription services for Prime Video India operations with regulatory compliance.</p>
+                        <ul class="achievements">
+                            <li>Added e-mandate functionality for recurring payments meeting RBI requirements</li>
+                            <li>Ensured business continuity for Prime Video Channels in India</li>
+                            <li>Developed Free Trial Eligibility Service to prevent fraud</li>
+                            <li>Identified duplicate payment methods and fraud patterns</li>
+                            <li>Critical compliance project for business operations</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Payment Systems</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Regulatory Compliance</span>
+                            <span class="tech-tag">Subscriptions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">📺</div>
+                    <div class="timeline-content">
+                        <h3>Software Development Engineer I</h3>
+                        <h4>Amazon - Prime Video - India Operations</h4>
+                        <p class="timeline-period"><strong>August 2019 - September 2021 (2 years 2 months)</strong> | Bangalore, India</p>
+                        <p class="timeline-description">Built core features for Prime Video platform including payments, data migration, and channel onboarding.</p>
+                        <ul class="achievements">
+                            <li>Added local language keyboard for Chinese languages on Prime Video Living Room App</li>
+                            <li>Led data migration project for Indian customer payment information</li>
+                            <li>Implemented RBI-compliant data localization requirements</li>
+                            <li>Added e-mandate functionality for Prime subscriptions</li>
+                            <li>Launched Channels on Prime Video India with 3rd party integrations</li>
+                            <li>Onboarded premium channels like Eros Now and Discovery+</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Payment Systems</span>
+                            <span class="tech-tag">Data Migration</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Localization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">🔬</div>
+                    <div class="timeline-content">
+                        <span class="timeline-badge">Internship</span>
+                        <h3>R&amp;D Intern</h3>
+                        <h4>National Instruments</h4>
+                        <p class="timeline-period"><strong>January 2019 - June 2019 (6 months)</strong> | Bengaluru, Karnataka, India</p>
+                        <p class="timeline-description">Research and development internship focused on automation and electronic circuit design.</p>
+                        <ul class="achievements">
+                            <li>Worked on automating electronic circuit creation</li>
+                            <li>User-specified input, output, and computation parameters</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Circuit Design</span>
+                            <span class="tech-tag">R&amp;D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>💻 Programming Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Python</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>SQL</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Java</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>C++</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>☁️ AWS &amp; Cloud</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>AWS</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Distributed Systems</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>System Architecture</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Infrastructure Optimization</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>⭐ Specializations</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Ad Server Architecture</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Payment Systems</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Machine Learning Platforms</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Data Migration &amp; Localization</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🛠️ Tools &amp; Technologies</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Amazon Kiro</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Amazon Q</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Contract Parsing</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>Dashboard Visualization</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">💰</div>
+                    <h3>Publisher Ad Server Optimization</h3>
+                    <p>Optimized Amazon's Publisher Ad Server infrastructure generating $100M+ in ad revenue through Thursday Night Football and other live events, while achieving $15MM+ in yearly cost savings.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Ad Server Architecture</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Distributed Systems</span>
+                    </div>
+                    <span class="project-category">Professional</span>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">🤖</div>
+                    <h3>ML Model Evaluation Framework</h3>
+                    <p>Built comprehensive end-to-end ML model evaluation system for Prime Video with data sampling, ground truth collection, metrics computation, and custom dashboard visualization.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Dashboard Visualization</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                    <span class="project-category">Professional</span>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">📦</div>
+                    <h3>Warehouse Operations Visibility Platform</h3>
+                    <p>Developed real-time tracking and visibility tools for global Amazon warehouse operations, enabling facility managers to track package status and associate activities worldwide.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Real-time Systems</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Distributed Systems</span>
+                    </div>
+                    <span class="project-category">Professional</span>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">💳</div>
+                    <h3>Prime Video Payment Systems</h3>
+                    <p>Built mission-critical payment and subscription systems for Prime Video India operations with regulatory compliance for e-mandate and RBI data localization requirements.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Payment Systems</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Regulatory Compliance</span>
+                    </div>
+                    <span class="project-category">Professional</span>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">📄</div>
+                    <h3>Contract Parsing &amp; Analysis System</h3>
+                    <p>Automated extraction and analysis of content provider agreements to identify Prime Video's rights including localization, distribution, and content modification capabilities.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">NLP</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Contract Parsing</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                    <span class="project-category">Professional</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests & Expertise Section -->
+    <section class="section hobbies" id="hobbies">
+        <div class="container">
+            <h2 class="section-title">Interests &amp; Expertise</h2>
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-icon">⚙️</div>
+                    <h3>Scalable Systems Design</h3>
+                    <p>Architecting and designing large-scale distributed systems that handle massive data volumes with high reliability and efficiency.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🤖</div>
+                    <h3>Machine Learning &amp; AI</h3>
+                    <p>Building ML platforms and systems that leverage AI for business impact and customer experiences.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">💰</div>
+                    <h3>Ad Tech &amp; Monetization</h3>
+                    <p>Exploring innovative approaches to ad server architecture, monetization strategies, and revenue optimization.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🔗</div>
+                    <h3>Distributed Systems</h3>
+                    <p>Deep interest in distributed systems, architecture patterns, and solving large-scale infrastructure challenges.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">💳</div>
+                    <h3>Payment Systems</h3>
+                    <p>Building robust payment systems with focus on compliance, security, and regulatory requirements.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🚀</div>
+                    <h3>Innovation &amp; Technology</h3>
+                    <p>Passionate about emerging technologies, infrastructure optimization, and solving complex technical challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-intro">With multiple years at Amazon building scalable systems across ML Platform, Ad Tech, and Prime Video, I'm passionate about solving complex distributed systems problems and driving business impact. Let's connect!</p>
+            <div class="contact-content">
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm" action="https://formsubmit.co/contact@arpanchatterjee.tech" method="POST">
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="form-message" id="formMessage"></div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">
+                                <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                                Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Email</strong>
+                            <p><a href="mailto:contact@arpanchatterjee.tech">contact@arpanchatterjee.tech</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Seattle, Washington, United States</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <p><a href="https://www.linkedin.com/in/arpan-chatterjee-11a870165/" target="_blank">linkedin.com/in/arpan-chatterjee-11a870165</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Arpan Chatterjee</h3>
+                    <p>Software Development Engineer II @ Amazon</p>
+                    <p>ML Platform, Ad Tech &amp; Prime Video | $100M+ Revenue Impact</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#about">About</a>
+                    <a href="#experience">Experience</a>
+
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="footer-social">
+                        <a href="mailto:contact@arpanchatterjee.tech" aria-label="Email">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/arpan-chatterjee-11a870165/" target="_blank" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Arpan Chatterjee. All rights reserved.</p>
+                <p>Built with modern web technologies</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js?v=2.0.0&t=nocache"></script>
+</body>
+</html>
