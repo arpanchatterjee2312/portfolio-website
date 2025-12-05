@@ -227,6 +227,113 @@
             margin: 0 5px;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .initial-header {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            .initial-subtext {
+                font-size: 1em;
+                margin-bottom: 40px;
+            }
+
+            .instruction {
+                font-size: 1em;
+                margin-bottom: 50px;
+            }
+
+            .hidden-text {
+                font-size: 1.3em;
+                line-height: 1.5;
+                margin: 15px 0;
+                letter-spacing: 1px;
+            }
+
+            .butterfly-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .spawned-butterfly {
+                width: 35px;
+                height: 35px;
+            }
+
+            .love-letter {
+                width: 90%;
+                padding: 40px 30px;
+            }
+
+            .love-letter-content {
+                font-size: 1.2em;
+                line-height: 1.8;
+            }
+
+            .love-letter-content .butterfly-word {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .initial-header {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+
+            .initial-subtext {
+                font-size: 0.9em;
+                margin-bottom: 30px;
+            }
+
+            .instruction {
+                font-size: 0.9em;
+                margin-bottom: 40px;
+            }
+
+            .hidden-text {
+                font-size: 1.1em;
+                line-height: 1.4;
+                margin: 10px 0;
+                letter-spacing: 0.5px;
+            }
+
+            .butterfly-container {
+                width: 50px;
+                height: 50px;
+            }
+
+            .spawned-butterfly {
+                width: 30px;
+                height: 30px;
+            }
+
+            .love-letter {
+                width: 95%;
+                padding: 30px 20px;
+            }
+
+            .love-letter-content {
+                font-size: 1em;
+                line-height: 1.6;
+            }
+
+            .love-letter-content .butterfly-word {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -362,7 +469,7 @@
                 '#ff007f', '#ff0080'
             ];
 
-            const butterflyCount = 2000;
+            const butterflyCount = 1000;
 
             for (let i = 0; i < butterflyCount; i++) {
                 const butterfly = document.createElement('div');
