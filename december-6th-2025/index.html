@@ -1,1 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Butterfly Surprise ✨</title>
+    <style>
+        :root {
+            --color-bg-primary: #fff5f7;
+            --color-text-primary: #2d1b2e;
+            --color-accent: #ff69b4;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4ed 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            max-width: 800px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .hidden-text {
+            opacity: 0;
+            transition: opacity 2s ease;
+            font-size: 2.5em;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            margin: 20px 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hidden-text.revealed {
+            opacity: 1;
+        }
+
+        .butterfly-container {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            z-index: 100;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .butterfly {
+            width: 100%;
+            height: 100%;
+            animation: flutter 0.6s ease-in-out infinite;
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-10px) scaleY(0.95); }
+        }
+
+        .spawned-butterfly {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fillPage {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes driftAway {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .spawned-butterfly.filling {
+            animation: fillPage 0.8s ease-out forwards;
+        }
+
+        .spawned-butterfly.flying {
+            animation: driftAway 4s ease-out forwards;
+        }
+
+        .initial-header {
+            font-size: 3em;
+            color: var(--color-accent);
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 400;
+            letter-spacing: 1px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .initial-subtext {
+            font-size: 1.3em;
+            color: var(--color-text-primary);
+            margin-bottom: 60px;
+            opacity: 0.7;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .instruction {
+            font-size: 1.3em;
+            color: var(--color-text-primary);
+            margin-bottom: 80px;
+            opacity: 0.9;
+            transition: opacity 1s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .instruction.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .initial-header.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .initial-subtext.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .instruction.hidden {
+            display: none;
+        }
+
+        .initial-subtext.hidden {
+            display: none;
+        }
+
+        .love-letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-width: 700px;
+            padding: 60px 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50% 50% 48% 52% / 52% 48% 52% 48%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            opacity: 0;
+            animation: revealLetter 1.5s ease-out 3s forwards;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .love-letter-content {
+            font-size: 1.8em;
+            color: var(--color-text-primary);
+            line-height: 2;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .love-letter-content .butterfly-word {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="initial-header">✨ For You ✨</h1>
+        <p class="initial-subtext">A little surprise...</p>
+        <p class="instruction">Catch the butterfly if you can</p>
+        <div class="hidden-text">
+            You're my <span id="butterfly-placeholder"></span>
+            <br><br>
+            as colorful as the 🌈<br>
+            as vibrant as the 🌊<br>
+            as shiny as the 💎<br>
+            as lively as the 🌍<br>
+
+            Please take care of yourself and your heart. ❤️
+        </div>
+    </div>
+
+    <div class="butterfly-container" id="butterfly">
+        <div class="butterfly">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                <ellipse cx="35" cy="25" rx="18" ry="25" fill="#ff69b4" opacity="0.9"/>
+                <ellipse cx="32" cy="55" rx="15" ry="20" fill="#ff1493" opacity="0.85"/>
+                <ellipse cx="65" cy="25" rx="18" ry="25" fill="#ff69b4" opacity="0.9"/>
+                <ellipse cx="68" cy="55" rx="15" ry="20" fill="#ff1493" opacity="0.85"/>
+                <ellipse cx="50" cy="50" rx="6" ry="18" fill="#8b0a50"/>
+                <circle cx="50" cy="35" r="5" fill="#8b0a50"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        const butterflyContainer = document.getElementById('butterfly');
+        const hiddenText = document.querySelector('.hidden-text');
+        let isRevealed = false;
+        let isMoving = false;
+
+        function createButterflyDOM(design, color1, color2) {
+            const svgString = getSVGDesign(design, color1, color2);
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = svgString;
+            return wrapper.firstChild;
+        }
+
+        function getSVGDesign(design, color1, color2) {
+            switch(design) {
+                case 0:
+                    return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                        <ellipse cx="35" cy="25" rx="18" ry="25" fill="${color1}" opacity="0.9"/>
+                        <ellipse cx="32" cy="55" rx="15" ry="20" fill="${color2}" opacity="0.85"/>
+                        <ellipse cx="65" cy="25" rx="18" ry="25" fill="${color1}" opacity="0.9"/>
+                        <ellipse cx="68" cy="55" rx="15" ry="20" fill="${color2}" opacity="0.85"/>
+                        <ellipse cx="50" cy="50" rx="6" ry="18" fill="#8b0a50"/>
+                        <circle cx="50" cy="35" r="5" fill="#8b0a50"/>
+                    </svg>`;
+                case 1:
+                    return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                        <path d="M 50 50 Q 25 15 20 5 Q 15 0 10 12 Q 8 25 25 50 Q 40 60 50 50" fill="${color1}" opacity="0.9"/>
+                        <path d="M 50 50 Q 75 15 80 5 Q 85 0 90 12 Q 92 25 75 50 Q 60 60 50 50" fill="${color1}" opacity="0.9"/>
+                        <path d="M 50 50 Q 28 70 22 85 Q 18 95 28 98 Q 38 92 45 75 Q 48 62 50 50" fill="${color2}" opacity="0.85"/>
+                        <path d="M 50 50 Q 72 70 78 85 Q 82 95 72 98 Q 62 92 55 75 Q 52 62 50 50" fill="${color2}" opacity="0.85"/>
+                        <ellipse cx="50" cy="48" rx="5" ry="15" fill="#8b0a50"/>
+                        <circle cx="50" cy="35" r="4" fill="#8b0a50"/>
+                    </svg>`;
+                case 2:
+                    return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                        <ellipse cx="32" cy="30" rx="16" ry="24" fill="${color1}" opacity="0.9" transform="rotate(-20 32 30)"/>
+                        <ellipse cx="32" cy="60" rx="13" ry="19" fill="${color2}" opacity="0.85" transform="rotate(-20 32 60)"/>
+                        <ellipse cx="68" cy="30" rx="16" ry="24" fill="${color1}" opacity="0.9" transform="rotate(20 68 30)"/>
+                        <ellipse cx="68" cy="60" rx="13" ry="19" fill="${color2}" opacity="0.85" transform="rotate(20 68 60)"/>
+                        <ellipse cx="50" cy="50" rx="5" ry="16" fill="#8b0a50"/>
+                        <circle cx="50" cy="36" r="4.5" fill="#8b0a50"/>
+                    </svg>`;
+            }
+        }
+
+        function getRandomPosition() {
+            const maxX = window.innerWidth - 100;
+            const maxY = window.innerHeight - 100;
+            return {
+                x: Math.max(0, Math.random() * maxX),
+                y: Math.max(0, Math.random() * maxY)
+            };
+        }
+
+        function moveButterfly() {
+            if (isRevealed) return;
+            
+            const pos = getRandomPosition();
+            isMoving = true;
+            
+            butterflyContainer.style.transition = 'all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            butterflyContainer.style.left = pos.x + 'px';
+            butterflyContainer.style.top = pos.y + 'px';
+            
+            setTimeout(() => {
+                isMoving = false;
+                scheduleNextMove();
+            }, 3000);
+        }
+
+        function scheduleNextMove() {
+            const randomDelay = Math.random() * 3000 + 2000;
+            setTimeout(moveButterfly, randomDelay);
+        }
+
+        let initialPos = getRandomPosition();
+        butterflyContainer.style.left = initialPos.x + 'px';
+        butterflyContainer.style.top = initialPos.y + 'px';
+
+        setTimeout(moveButterfly, 2000);
+
+        butterflyContainer.addEventListener('click', function(e) {
+            if (isRevealed) return;
+            
+            isRevealed = true;
+            
+            // Move butterfly to placeholder
+            const placeholder = document.getElementById('butterfly-placeholder');
+            const placeholderRect = placeholder.getBoundingClientRect();
+            
+            butterflyContainer.style.transition = 'all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            butterflyContainer.style.left = (placeholderRect.left + window.scrollX) + 'px';
+            butterflyContainer.style.top = (placeholderRect.top + window.scrollY) + 'px';
+            butterflyContainer.style.width = '60px';
+            butterflyContainer.style.height = '60px';
+            butterflyContainer.style.zIndex = '1001';
+            
+            const colors = [
+                '#ff69b4', '#ff1493', '#ffb6d9', '#ff85c0',
+                '#ff00ff', '#ff6ec7', '#ffc0cb', '#ff1f77',
+                '#ff007f', '#ff0080'
+            ];
+
+            const butterflyCount = 2000;
+
+            for (let i = 0; i < butterflyCount; i++) {
+                const butterfly = document.createElement('div');
+                butterfly.className = 'spawned-butterfly';
+                
+                const color1 = colors[Math.floor(Math.random() * colors.length)];
+                const color2 = colors[Math.floor(Math.random() * colors.length)];
+                const design = Math.floor(Math.random() * 3);
+                
+                const svg = createButterflyDOM(design, color1, color2);
+                butterfly.appendChild(svg);
+                
+                butterfly.style.left = Math.random() * window.innerWidth + 'px';
+                butterfly.style.top = Math.random() * window.innerHeight + 'px';
+                
+                document.body.appendChild(butterfly);
+                
+                setTimeout(() => {
+                    butterfly.classList.add('filling');
+                }, Math.random() * 400);
+            }
+
+            setTimeout(() => {
+                const allButterflies = document.querySelectorAll('.spawned-butterfly');
+                
+                allButterflies.forEach((butterfly) => {
+                    butterfly.classList.remove('filling');
+                    butterfly.style.setProperty('--tx', (Math.random() - 0.5) * 1200 + 'px');
+                    butterfly.style.setProperty('--ty', (Math.random() - 0.5) * 1200 + 'px');
+                    
+                    setTimeout(() => {
+                        butterfly.classList.add('flying');
+                    }, Math.random() * 200);
+                });
+            }, 1500);
+
+            const instruction = document.querySelector('.instruction');
+            const initialHeader = document.querySelector('.initial-header');
+            const initialSubtext = document.querySelector('.initial-subtext');
+            
+            setTimeout(() => {
+                hiddenText.classList.add('revealed');
+                instruction.classList.add('hidden');
+                initialHeader.classList.add('hidden');
+                initialSubtext.classList.add('hidden');
+                document.querySelector('.container').style.pointerEvents = 'auto';
+                
+                // Recalculate butterfly position to align with revealed text
+                setTimeout(() => {
+                    const placeholder = document.getElementById('butterfly-placeholder');
+                    const placeholderRect = placeholder.getBoundingClientRect();
+                    butterflyContainer.style.left = (placeholderRect.left + window.scrollX - 10) + 'px';
+                    butterflyContainer.style.top = (placeholderRect.top + window.scrollY - 10) + 'px';
+                }, 100);
+            }, 2500);
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isRevealed && !isMoving) {
+                scheduleNextMove();
+            }
+        });
+    </script>
+</body>
+</html>
