@@ -901,11 +901,21 @@
             }
         });
 
-        // Auto-focus input when enlarged
-        heartContainer.addEventListener('click', function() {
-            if (heartEnlarged) {
-                guessInput.focus();
-            }
+        // Handle input focus for mobile keyboards
+        guessInput.addEventListener('focus', function() {
+            // Scroll to ensure input is visible above keyboard on mobile
+            setTimeout(() => {
+                this.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
+            }, 300); // Delay to allow keyboard animation
+        });
+
+        // Prevent zoom on iOS when input is focused
+        guessInput.addEventListener('touchstart', function(e) {
+            this.style.fontSize = '16px';
         });
     </script>
 </body>
