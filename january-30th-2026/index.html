@@ -161,27 +161,110 @@
             transform: translateY(0);
         }
 
-        .error-message {
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            margin-top: 15px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px 20px;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            line-height: 1.4;
-            max-width: 400px;
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
         }
 
-        .error-message.show {
-            opacity: 1;
+        .error-popup.active {
+            display: flex;
+        }
+
+        .error-popup-content {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.98) 0%, rgba(255, 240, 245, 0.98) 100%);
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 350px;
+            margin: 20px;
+            animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            position: relative;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-100px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) translateY(0);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .error-popup-content::before {
+            content: '💔';
+            font-size: 40px;
+            display: block;
+            margin-bottom: 15px;
+            animation: heartBreak 1s ease-in-out;
+        }
+
+        @keyframes heartBreak {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .error-popup h3 {
+            color: #d946a6;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .error-popup p {
+            color: #8b5a6b;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .error-popup-close {
+            background: linear-gradient(135deg, #d946a6, #f472b6);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .error-popup-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(217, 70, 166, 0.4);
+        }
+
+        .error-popup-close:active {
+            transform: translateY(0);
         }
 
         /* ===== HEARTS OVERLAY ===== */
@@ -699,7 +782,6 @@
         <div class="input-container" id="inputContainer">
             <input type="text" id="guessInput" placeholder="0000" maxlength="4" inputmode="numeric">
             <button class="btn-reveal" id="revealBtn">Reveal Secret</button>
-            <div class="error-message" id="errorMessage"></div>
         </div>
     </div>
 
@@ -734,6 +816,15 @@
         </div>
     </div>
 
+    <!-- ERROR POPUP -->
+    <div class="error-popup" id="errorPopup">
+        <div class="error-popup-content">
+            <h3>Oops! Not quite right! 🥺</h3>
+            <p id="errorPopupMessage">Ohhh nooo... that's not it baby 🥺💭 Give it another try, I know you can do it! 💪❤️</p>
+            <button class="error-popup-close" id="errorPopupClose">Try Again ✨</button>
+        </div>
+    </div>
+
     <!-- GIFT MODAL -->
     <div class="gift-modal" id="giftModal">
         <div class="gift-modal-content">
@@ -762,7 +853,9 @@
         const inputContainer = document.getElementById('inputContainer');
         const guessInput = document.getElementById('guessInput');
         const revealBtn = document.getElementById('revealBtn');
-        const errorMessage = document.getElementById('errorMessage');
+        const errorPopup = document.getElementById('errorPopup');
+        const errorPopupMessage = document.getElementById('errorPopupMessage');
+        const errorPopupClose = document.getElementById('errorPopupClose');
         const landingPage = document.getElementById('landingPage');
         const letterPage = document.getElementById('letterPage');
         const heartsOverlay = document.getElementById('heartsOverlay');
@@ -791,11 +884,10 @@
         // Reveal button click
         revealBtn.addEventListener('click', function() {
             const guess = guessInput.value;
-            errorMessage.classList.remove('show');
 
             if (guess.length !== 4) {
-                errorMessage.textContent = 'Please enter a 4-digit number';
-                errorMessage.classList.add('show');
+                errorPopupMessage.textContent = 'Please enter a 4-digit number! 🔢✨';
+                errorPopup.classList.add('active');
                 return;
             }
 
@@ -803,10 +895,9 @@
                 // Correct PIN
                 revealSecret();
             } else {
-                errorMessage.textContent = 'Ohhh nooo... that\'s not it baby 🥺💭 Give it another try, I know you can do it! 💪❤️';
-                errorMessage.classList.add('show');
+                errorPopupMessage.textContent = 'Ohhh nooo... that\'s not it baby 🥺💭 Give it another try, I know you can do it! 💪❤️';
+                errorPopup.classList.add('active');
                 guessInput.value = '';
-                guessInput.focus();
             }
         });
 
@@ -853,13 +944,26 @@
             }, 3000);
         }
 
+        // Close error popup
+        errorPopupClose.addEventListener('click', function() {
+            errorPopup.classList.remove('active');
+            guessInput.focus();
+        });
+
+        errorPopup.addEventListener('click', function(e) {
+            if (e.target === errorPopup) {
+                errorPopup.classList.remove('active');
+                guessInput.focus();
+            }
+        });
+
         // Close letter
         closeBtn.addEventListener('click', function() {
             letterPage.classList.remove('show');
             landingPage.classList.remove('hidden');
             heartsOverlay.classList.remove('active');
             guessInput.value = '';
-            errorMessage.classList.remove('show');
+            errorPopup.classList.remove('active');
         });
 
         // Gift badge clicks
