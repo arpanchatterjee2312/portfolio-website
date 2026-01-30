@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 300;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #c71585 100%);
+            min-height: 100vh;
+        }
+
+        /* ===== LANDING PAGE STYLES ===== */
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+            z-index: 100;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.3) 0%, rgba(255, 20, 147, 0.3) 100%);
+        }
+
+        .landing-page.hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-container {
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .heart {
+            font-size: 100px;
+            display: inline-block;
+            animation: beatHeart 1.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.8));
+        }
+
+        @keyframes beatHeart {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1.35);
+            }
+            75% {
+                transform: scale(1.2);
+            }
+        }
+
+        .heart-container.enlarged .heart {
+            font-size: 200px;
+            animation: beatHeart 0.8s ease-in-out infinite;
+        }
+
+        .message {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: white;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-out 0.3s;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 15px rgba(255, 20, 147, 0.6);
+            line-height: 1.4;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.6s ease-out 0.6s;
+        }
+
+        .input-container.show {
+            opacity: 1;
+        }
+
+        .input-container input {
+            width: 200px;
+            padding: 12px 20px;
+            font-size: 24px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            text-align: center;
+            letter-spacing: 8px;
+            border: 2px solid white;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .input-container input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #ff69b4;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .btn-reveal {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        .btn-reveal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
+        }
+
+        .btn-reveal:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+            max-width: 400px;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        /* ===== HEARTS OVERLAY ===== */
+        .hearts-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .hearts-overlay.active {
+            opacity: 1;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 40px;
+            animation: fall 3s linear forwards;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== LETTER PAGE STYLES ===== */
+        .letter-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #c71585 100%);
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 1s ease-out;
+            z-index: 50;
+            padding: 60px 20px 40px;
+        }
+
+        .letter-page.show {
+            display: block;
+            opacity: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 240, 245, 0.99) 100%);
+            padding: 60px 50px;
+            border-radius: 25px;
+            box-shadow: 0 30px 100px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 105, 180, 0.4);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            line-height: 1.8;
+            color: #2c1a2e;
+            animation: slideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+            letter-spacing: 0.3px;
+            font-size: 17px;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .letter-content p {
+            margin-bottom: 2rem;
+            text-align: justify;
+            color: #3d2540;
+            transition: all 0.3s ease;
+        }
+
+        .letter-content p:hover {
+            color: #d946a6;
+            transform: translateX(5px);
+        }
+
+        .letter-content strong {
+            color: #d946a6;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-shadow: 0 2px 4px rgba(217, 70, 166, 0.1);
+        }
+
+        .letter-content em {
+            color: #764ba2;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .letter-signature {
+            margin-top: 3rem;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+            font-size: 20px;
+            color: #d946a6;
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 300;
+            opacity: 0;
+            transition: opacity 0.5s ease 1s;
+        }
+
+        .letter-page.show .close-btn {
+            opacity: 1;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .gift-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #d946a6, #f472b6);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gift-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(217, 70, 166, 0.4);
+        }
+
+        .gift-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .gift-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gift-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gift-modal-content h3 {
+            color: #d946a6;
+            margin-bottom: 1rem;
+            font-size: 26px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .gift-modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .gift-code {
+            background: linear-gradient(135deg, #d946a6, #f472b6);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            word-break: break-all;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .gift-code:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(217, 70, 166, 0.5);
+        }
+
+        .gift-close-btn {
+            background: #d946a6;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .gift-close-btn:hover {
+            background: #c02a96;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .landing-page {
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .heart {
+                font-size: 80px;
+            }
+
+            .heart-container.enlarged .heart {
+                font-size: 140px;
+            }
+
+            .message {
+                font-size: 20px;
+                padding: 0 20px;
+                margin-bottom: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .message span {
+                font-size: 28px !important;
+                letter-spacing: 1px !important;
+            }
+
+            .input-container {
+                gap: 1.5rem;
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .input-container input {
+                width: 280px;
+                font-size: 18px;
+                padding: 14px 20px;
+                letter-spacing: 6px;
+            }
+
+            .btn-reveal {
+                padding: 14px 35px;
+                font-size: 14px;
+                letter-spacing: 2px;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .error-message {
+                font-size: 14px;
+                padding: 10px 15px;
+                max-width: 320px;
+                margin: 0 10px;
+            }
+
+            .letter-page {
+                padding: 20px 15px 40px;
+            }
+
+            .letter-content {
+                padding: 40px 25px;
+                margin: 0 auto;
+                font-size: 15px;
+                line-height: 1.7;
+                border-radius: 20px;
+            }
+
+            .letter-content p {
+                margin-bottom: 1.5rem;
+                text-align: left;
+            }
+
+            .letter-content p:first-of-type {
+                font-size: 28px !important;
+                letter-spacing: 8px !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .letter-signature {
+                font-size: 18px;
+                margin-top: 2rem;
+            }
+
+            .close-btn {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 24px;
+            }
+
+            .gift-modal-content {
+                padding: 30px 20px;
+                margin: 20px;
+                max-width: 320px;
+                border-radius: 15px;
+            }
+
+            .gift-modal-content h3 {
+                font-size: 22px;
+            }
+
+            .gift-modal-content p {
+                font-size: 14px;
+            }
+
+            .gift-code {
+                padding: 15px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .gift-close-btn {
+                padding: 12px 25px;
+                font-size: 13px;
+            }
+
+            .gift-badge {
+                padding: 3px 8px;
+                font-size: 11px;
+                margin-left: 5px;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .heart {
+                font-size: 70px;
+            }
+
+            .heart-container.enlarged .heart {
+                font-size: 120px;
+            }
+
+            .message {
+                font-size: 18px;
+                padding: 0 15px;
+            }
+
+            .message span {
+                font-size: 24px !important;
+            }
+
+            .input-container input {
+                width: 250px;
+                font-size: 16px;
+                padding: 12px 18px;
+                letter-spacing: 5px;
+            }
+
+            .btn-reveal {
+                max-width: 250px;
+                padding: 12px 30px;
+                font-size: 13px;
+            }
+
+            .error-message {
+                font-size: 13px;
+                padding: 8px 12px;
+                max-width: 280px;
+            }
+
+            .letter-content {
+                padding: 30px 20px;
+                font-size: 14px;
+            }
+
+            .letter-content p:first-of-type {
+                font-size: 24px !important;
+                letter-spacing: 6px !important;
+            }
+
+            .gift-modal-content {
+                margin: 10px;
+                padding: 25px 15px;
+                max-width: 280px;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .landing-page {
+                padding: 10px;
+            }
+
+            .heart {
+                font-size: 60px;
+            }
+
+            .heart-container.enlarged .heart {
+                font-size: 100px;
+            }
+
+            .message {
+                font-size: 16px;
+                margin-bottom: 1rem;
+            }
+
+            .message span {
+                font-size: 20px !important;
+            }
+
+            .input-container {
+                gap: 1rem;
+            }
+
+            .letter-page {
+                padding: 15px 10px 20px;
+            }
+
+            .letter-content {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LANDING PAGE -->
+    <div class="landing-page" id="landingPage">
+        <div class="heart-container" id="heartContainer">
+            <div class="heart" id="heartEmoji">❤️</div>
+        </div>
+        <div class="message" id="message">
+            <span style="font-size: 34px; display: block; margin-bottom: 1rem; font-family: 'Dancing Script', cursive; font-weight: 600; letter-spacing: 2px;">Heyyyyyllloooooo Guggiiiieeee 💕💕💕</span>
+            Can you guess our special 4 digit number? 🎂✨
+        </div>
+        <div class="input-container" id="inputContainer">
+            <input type="text" id="guessInput" placeholder="0000" maxlength="4" inputmode="numeric">
+            <button class="btn-reveal" id="revealBtn">Reveal Secret</button>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+    </div>
+
+    <!-- HEARTS OVERLAY -->
+    <div class="hearts-overlay" id="heartsOverlay"></div>
+
+    <!-- LETTER PAGE -->
+    <div class="letter-page" id="letterPage">
+        <button class="close-btn" id="closeBtn">✕</button>
+        <div class="letter-content" id="letterContent">
+            <p style="text-align: center; font-size: 32px; margin-bottom: 3rem; letter-spacing: 12px; font-family: 'Poppins', sans-serif;">💕 💖 💗 💝 💓</p>
+
+            <p>Today, I wanted to take a moment to tell you something I feel every single day but can never quite put into words: <strong>I love you more than you can ever possibly know.</strong></p>
+
+            <p>It's been <strong>1111 days</strong> <span class="gift-badge" data-number="1111">🎁</span> since we first started this incredible journey together on <strong>January 15, 2023</strong> <span class="gift-badge" data-number="115">🎁</span>. I still remember that day so vividly—the moment my life changed forever. We built something beautiful together, something that felt unbreakable. We laughed together, dreamed together, and created memories that will stay with me for the rest of my life.</p>
+
+            <p>But life had other plans for us.</p>
+
+            <p>When we went through our breakup, I thought I had lost you forever. I didn't know how to exist without you. I didn't understand how something so right could feel so wrong in that moment. And then, on <strong>November 17, 2025</strong> <span class="gift-badge" data-number="1117">🎁</span>, destiny gave us a second chance. You walked back into my life like the most beautiful answer to a prayer I didn't even know I was praying.</p>
+
+            <p>On <strong>December 14, 2025</strong> <span class="gift-badge" data-number="1214">🎁</span>, we came back together—not as the same people we were before, but as better versions of ourselves. We came back stronger, wiser, and more aware of what we truly mean to each other. Every moment since has been the sweetest reminder that soulmates aren't just people you meet once—they're people you keep finding, no matter how many times you lose your way.</p>
+
+            <p>People told us we were crazy. They said we wouldn't last. Our families doubted us, questioned us, tried to pull us apart. Everyone around us seemed to have an opinion about our happiness—almost as if our joy was a threat to theirs. But you know what? I wouldn't change a single moment. Not the pain, not the struggle, not even the tears. Because through it all, we found each other. We chose each other. <strong>Every. Single. Time.</strong></p>
+
+            <p>We've completed <strong>3 years</strong> <span class="gift-badge" data-number="3">🎁</span> since that first day—<strong>3 years</strong> of roller-coasters, of ups and downs, of challenges that would have broken weaker souls. But we're still here. We're still fighting for this. We're still choosing love, choosing us, choosing forever.</p>
+
+            <p>To everyone who doubted us: thank you for making us stronger. To every obstacle: thank you for showing us what we're made of. And to you, my love—thank you for never giving up on us, even when the world tried to convince you that you should.</p>
+
+            <p>I want to spend the rest of my life waking up next to you, fighting alongside you, celebrating with you, and building a future that's ours and ours alone. I want to prove to everyone who was jealous of our happiness that true love conquers all.</p>
+
+            <p><strong>I love you more than words, more than actions, more than anything this world has to offer.</strong></p>
+        </div>
+    </div>
+
+    <!-- GIFT MODAL -->
+    <div class="gift-modal" id="giftModal">
+        <div class="gift-modal-content">
+            <h3>🎁 A Gift For You</h3>
+            <p id="giftDescription"></p>
+            <a href="" id="giftLink" target="_blank" style="text-decoration: none;">
+                <div class="gift-code" id="giftCode">🎁 Claim Your Gift ✨</div>
+            </a>
+            <button class="gift-close-btn" id="giftCloseBtn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const validPins = ['2523', '2325', '1501', '1711', '1412', '1111'];
+        const giftCards = {
+            '1111': { description: '1111 days of our magical love story! 🌟✨', code: 'https://nyka.page.link/WsTMj' },
+            '115': { description: 'January 15 - The day everything changed! 💫', code: 'https://www.amazon.in/g/B7D3N0H7ENKK8DLM?ref=gc_typ' },
+            '1117': { description: 'November 17 - When destiny brought us back! 🌙', code: 'https://www.amazon.in/g/8EJ8SSF3DMRS62FB?ref=gc_typ' },
+            '1214': { description: 'December 14 - When we chose forever again! 🔄', code: 'https://www.amazon.in/g/O0F5U5DSCV2Q5KG7?ref=gc_yo' },
+            '3': { description: '3 years of our incredible journey! 🎉', code: 'https://nyka.page.link/Mu47e' }
+        };
+
+        const heartContainer = document.getElementById('heartContainer');
+        const heartEmoji = document.getElementById('heartEmoji');
+        const message = document.getElementById('message');
+        const inputContainer = document.getElementById('inputContainer');
+        const guessInput = document.getElementById('guessInput');
+        const revealBtn = document.getElementById('revealBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const landingPage = document.getElementById('landingPage');
+        const letterPage = document.getElementById('letterPage');
+        const heartsOverlay = document.getElementById('heartsOverlay');
+        const closeBtn = document.getElementById('closeBtn');
+        const giftModal = document.getElementById('giftModal');
+        const giftCloseBtn = document.getElementById('giftCloseBtn');
+        const jsConfetti = new JSConfetti();
+
+        let heartEnlarged = false;
+
+        // Heart click handler
+        heartContainer.addEventListener('click', function() {
+            if (!heartEnlarged) {
+                heartEnlarged = true;
+                heartContainer.classList.add('enlarged');
+                message.classList.add('show');
+                inputContainer.classList.add('show');
+            }
+        });
+
+        // Input validation
+        guessInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Reveal button click
+        revealBtn.addEventListener('click', function() {
+            const guess = guessInput.value;
+            errorMessage.classList.remove('show');
+
+            if (guess.length !== 4) {
+                errorMessage.textContent = 'Please enter a 4-digit number';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            if (validPins.includes(guess)) {
+                // Correct PIN
+                revealSecret();
+            } else {
+                errorMessage.textContent = 'Ohhh nooo... that\'s not it baby 🥺💭 Give it another try, I know you can do it! 💪❤️';
+                errorMessage.classList.add('show');
+                guessInput.value = '';
+                guessInput.focus();
+            }
+        });
+
+        // Reveal secret with hearts animation
+        function revealSecret() {
+            // Hide landing page
+            landingPage.classList.add('hidden');
+            
+            // Show hearts overlay and animate
+            heartsOverlay.classList.add('active');
+            
+            // Create falling hearts
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    createFallingHeart();
+                }, i * 30);
+            }
+
+            // Confetti celebration
+            jsConfetti.addConfetti({
+                emojis: ['❤️', '💕', '💖', '💝', '✨', '🎉'],
+                confettiNumber: 50,
+                emojiSize: 50
+            });
+
+            // Show letter after a delay
+            setTimeout(() => {
+                letterPage.classList.add('show');
+            }, 800);
+        }
+
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '-50px';
+            heart.style.fontSize = (20 + Math.random() * 40) + 'px';
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            heartsOverlay.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Close letter
+        closeBtn.addEventListener('click', function() {
+            letterPage.classList.remove('show');
+            landingPage.classList.remove('hidden');
+            heartsOverlay.classList.remove('active');
+            guessInput.value = '';
+            errorMessage.classList.remove('show');
+        });
+
+        // Gift badge clicks
+        document.querySelectorAll('.gift-badge').forEach(badge => {
+            badge.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const number = this.dataset.number;
+                const gift = giftCards[number];
+                
+                if (gift) {
+                    document.getElementById('giftDescription').textContent = gift.description;
+                    document.getElementById('giftLink').href = gift.code;
+                    giftModal.classList.add('active');
+                    
+                    // Confetti for gift
+                    jsConfetti.addConfetti({
+                        emojis: ['🎁', '✨', '💝'],
+                        confettiNumber: 30
+                    });
+                }
+            });
+        });
+
+        // Close gift modal
+        giftCloseBtn.addEventListener('click', function() {
+            giftModal.classList.remove('active');
+        });
+
+        giftModal.addEventListener('click', function(e) {
+            if (e.target === giftModal) {
+                giftModal.classList.remove('active');
+            }
+        });
+
+        // Enter key on input
+        guessInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                revealBtn.click();
+            }
+        });
+
+        // Auto-focus input when enlarged
+        heartContainer.addEventListener('click', function() {
+            if (heartEnlarged) {
+                guessInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
